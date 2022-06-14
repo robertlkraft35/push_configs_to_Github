@@ -18,7 +18,7 @@ g = Github(github_token)
 repo = g.get_user().get_repo(github_repo)
 
 commit_message = 'add configs'
-master_ref = repo.get_git_ref('heads/master')
+master_ref = repo.get_git_ref('heads/main')
 master_sha = master_ref.object.sha
 base_tree = repo.get_git_tree(master_sha)
 
@@ -27,7 +27,7 @@ element_list = list()
 for entry in file_list:
     with open(entry, 'r') as input_file:
         data = input_file.read()
-    element = InputFitTreeElement(entry, '100644', 'blob', data)
+    element = InputGitTreeElement(entry, '100644', 'blob', data)
     element_list.append(element)
 
 # Create tree and commit
